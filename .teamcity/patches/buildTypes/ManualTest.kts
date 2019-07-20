@@ -29,6 +29,7 @@ create(DslContext.projectId, BuildType({
             param("dockerImage.platform", "linux")
         }
         dockerCommand {
+            name = "Run test"
             commandType = other {
                 subCommand = "run"
                 workingDir = "frontend"
