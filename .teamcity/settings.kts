@@ -38,6 +38,7 @@ object Test : BuildType({
 
     vcs {
         root(MamkinDevopsVcs)
+        checkoutMode = CheckoutMode.ON_AGENT
     }
 
     steps {
@@ -47,6 +48,7 @@ object Test : BuildType({
                 #!/bin/sh
                 
                 echo "testing"
+                make -C ./frontend test/unit
                 exit 0
             """.trimIndent()
         }
