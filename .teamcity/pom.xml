@@ -4,7 +4,7 @@
   <name>MamkinDevops Config DSL Script</name>
 
   <properties>
-    <kotlin.version>1.3.41</kotlin.version>
+    <kotlin.version>1.2.50</kotlin.version>
   </properties>
 
 
