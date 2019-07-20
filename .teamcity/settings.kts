@@ -1,6 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -27,6 +28,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2019.1"
 
 project {
+    vcsRoot(MamkinDevopsVcs)
 
     buildType(Test)
 }
@@ -35,7 +37,7 @@ object Test : BuildType({
     name = "test"
 
     vcs {
-        root(DslContext.settingsRoot)
+        root(MamkinDevopsVcs)
     }
 
     steps {
@@ -54,4 +56,18 @@ object Test : BuildType({
         vcs {
         }
     }
+})
+
+object MamkinDevopsVcs : GitVcsRoot({
+    id = AbsoluteId("MamkinDevopsVcsRoot")
+
+    name = "github repo"
+    url = "git@github.com:sshaman1101/mamkin-devops.git"
+    // authMethod = AuthMethod.DefaultPrivateKey()
+    authMethod = AuthMethod.UploadedKey()
+
+    branch = "master"
+    branchSpec = """
+        +:refs/heads/*
+    """.trimIndent()
 })
