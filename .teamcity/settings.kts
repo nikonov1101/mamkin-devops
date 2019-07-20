@@ -68,7 +68,7 @@ object Test : BuildType({
             publisher = github {
                 githubUrl = "https://api.github.com"
                 authType = personalToken {
-                    token = "zxxd0b6e0494cd1a91b002ed079d5182d9dcc45b5747c4ba410a4a1c297ab3377e53d0f0c1300850b08775d03cbe80d301b"
+                    token = "credentialsJSON:558f0acb-146d-4541-93e4-1c2833d8ef80"
                 }
             }
         }
