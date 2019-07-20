@@ -25,7 +25,6 @@ create(DslContext.projectId, BuildType({
                 source = path {
                     path = "Dockerfile"
                 }
-                commandArgs = "--pull"
             }
             param("dockerImage.platform", "linux")
         }
