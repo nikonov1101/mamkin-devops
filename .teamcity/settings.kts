@@ -1,4 +1,5 @@
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
@@ -39,6 +40,7 @@ object Test : BuildType({
     vcs {
         root(MamkinDevopsVcs)
         checkoutMode = CheckoutMode.ON_AGENT
+        cleanCheckout = true
     }
 
     steps {
@@ -61,11 +63,22 @@ object Test : BuildType({
     }
 
     triggers {
-        vcs {
+        vcs {}
+    }
+
+    features {
+        commitStatusPublisher {
+            // vcsRootExtId = "SSVE_Primary"
+            publisher = github {
+                githubUrl = "https://api.github.com"
+                authType = personalToken {
+                    token = "zxxd0b6e0494cd1a91b002ed079d5182d9dcc45b5747c4ba410a4a1c297ab3377e53d0f0c1300850b08775d03cbe80d301b"
+                }
+            }
         }
+
     }
 })
-
 
 object MamkinDevopsVcs : GitVcsRoot({
     id = AbsoluteId("MamkinDevopsVcsRoot")
