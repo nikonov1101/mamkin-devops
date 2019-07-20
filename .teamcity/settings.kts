@@ -45,7 +45,7 @@ object Test : BuildType({
         script {
             name = "frontend/unit"
             scriptContent = """
-                #!/bin/sh
+                #!/bin/bash
                 
                 echo "testing"
                 make -C ./frontend test/unit
