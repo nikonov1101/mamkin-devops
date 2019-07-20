@@ -8,7 +8,7 @@ object PublishCommitStatusFeature : CommitStatusPublisher({
     publisher = github {
         githubUrl = "https://api.github.com"
         authType = personalToken {
-            token = "credentialsJSON:c90c9078-cf47-4709-bf2b-6c3d5440b4ac"
+            token = "zxx8082c5f54077ba0eae2247c34e4adce68b5f5731999b0024cc2498a733fb320e3905446b8404e32a775d03cbe80d301b"
         }
     }
 })
