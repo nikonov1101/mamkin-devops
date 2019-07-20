@@ -20,15 +20,6 @@ create(DslContext.projectId, BuildType({
 
     steps {
         dockerCommand {
-            name = "Build docker"
-            commandType = build {
-                source = path {
-                    path = "Dockerfile"
-                }
-            }
-            param("dockerImage.platform", "linux")
-        }
-        dockerCommand {
             name = "Run test"
             commandType = other {
                 subCommand = "run"
