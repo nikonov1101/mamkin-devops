@@ -1,4 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.CommitStatusPublisher
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.Swabra
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
@@ -26,8 +28,19 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 'Debug' option is available in the context menu for the task.
 */
 
+
+var publishCommitStatusFeature = CommitStatusPublisher {
+    publisher = github {
+        githubUrl = "https://api.github.com"
+        authType = personalToken {
+            token = "credentialsJSON:558f0acb-146d-4541-93e4-1c2833d8ef80"
+        }
+    }
+}
+
 version = "2019.1"
 
+// root project, the entrypoint of this configuration
 project {
     vcsRoot(MamkinDevopsVcs)
 
@@ -41,6 +54,14 @@ object Test : BuildType({
         root(MamkinDevopsVcs)
         checkoutMode = CheckoutMode.ON_AGENT
         cleanCheckout = true
+    }
+
+    triggers {
+        vcs {}
+    }
+
+    features {
+        publishCommitStatusFeature
     }
 
     steps {
@@ -57,33 +78,18 @@ object Test : BuildType({
             """.trimIndent()
         }
     }
-
-    triggers {
-        vcs {}
-    }
-
-    features {
-        commitStatusPublisher {
-            // vcsRootExtId = "SSVE_Primary"
-            publisher = github {
-                githubUrl = "https://api.github.com"
-                authType = personalToken {
-                    token = "credentialsJSON:558f0acb-146d-4541-93e4-1c2833d8ef80"
-                }
-            }
-        }
-
-    }
 })
 
 object MamkinDevopsVcs : GitVcsRoot({
     id = AbsoluteId("MamkinDevopsVcsRoot")
 
-    name = "github repo"
+    name = "sshaman1101/mamkin-devops"
     url = "git@github.com:sshaman1101/mamkin-devops.git"
     authMethod = uploadedKey {
         uploadedKey = "id_rsa_sshaman1101"
     }
+
+    userNameStyle = UserNameStyle.FULL
 
     branch = "master"
     branchSpec = """
