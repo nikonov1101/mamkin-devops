@@ -1,4 +1,5 @@
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 
@@ -34,7 +35,14 @@ object FrontendUnitTests : BuildType({
     }
 
     features {
-        PublishCommitStatusFeature
+        commitStatusPublisher {
+            publisher = github {
+                githubUrl = "https://api.github.com"
+                authType = personalToken {
+                    token = "credentialsJSON:558f0acb-146d-4541-93e4-1c2833d8ef80"
+                }
+            }
+        }
     }
 
     steps {
