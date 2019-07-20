@@ -19,6 +19,7 @@ object TestSuite : Project({
     name = "test suite"
 
     buildType(FrontendUnitTests)
+    buildType(FrontendE2ETest)
 })
 
 object FrontendUnitTests : BuildType({
@@ -50,6 +51,36 @@ object FrontendUnitTests : BuildType({
                 echo "testing"
                 exit 0
                 # make -C ./frontend test/unit
+            """.trimIndent()
+        }
+    }
+})
+
+object FrontendE2ETest : BuildType({
+    name = "frontend/e2e"
+
+    vcs {
+        root(MamkinDevopsVcsRoot)
+        checkoutMode = CheckoutMode.ON_AGENT
+        cleanCheckout = true
+    }
+
+    triggers {
+        vcs {}
+    }
+
+    features {
+        feature(PublishCommitStatusFeature)
+    }
+
+    steps {
+        script {
+            name = "frontend/unit"
+            scriptContent = """
+                #!/bin/bash
+
+                echo "testing"
+                exit 0
             """.trimIndent()
         }
     }
