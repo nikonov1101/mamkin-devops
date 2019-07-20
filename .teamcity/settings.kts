@@ -58,13 +58,15 @@ object Test : BuildType({
     }
 })
 
+
 object MamkinDevopsVcs : GitVcsRoot({
     id = AbsoluteId("MamkinDevopsVcsRoot")
 
     name = "github repo"
     url = "git@github.com:sshaman1101/mamkin-devops.git"
-    // authMethod = AuthMethod.DefaultPrivateKey()
-    authMethod = AuthMethod.UploadedKey()
+    authMethod = uploadedKey {
+        uploadedKey = "id_rsa_sshaman1101"
+    }
 
     branch = "master"
     branchSpec = """
