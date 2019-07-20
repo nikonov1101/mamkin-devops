@@ -5,7 +5,7 @@ lint:
 
 test/unit:
 	@npm install
-	@npm run test
+	@npm run test:ci
 
 test/e2e:
 	@npm run e2e
