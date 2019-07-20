@@ -2,6 +2,7 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -15,6 +16,15 @@ create(DslContext.projectId, BuildType({
 
     vcs {
         root(DslContext.settingsRoot)
+    }
+
+    steps {
+        exec {
+            name = "Run test"
+            workingDir = "frontend"
+            path = "npm"
+            arguments = "run test"
+        }
     }
 }))
 
