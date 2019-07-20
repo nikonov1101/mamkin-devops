@@ -47,9 +47,15 @@ object Test : BuildType({
             scriptContent = """
                 #!/bin/bash
                 
+                export NVM_DIR="${'$'}HOME/.nvm"
+                [ -s "${'$'}NVM_DIR/nvm.sh" ] && \. "${'$'}NVM_DIR/nvm.sh"  # This loads nvm
+                
+                echo ${'$'}HOME
+                echo ${'$'}PATH
+                echo ${'$'}NVM_DIR
+                
                 echo "testing"
                 make -C ./frontend test/unit
-                exit 0
             """.trimIndent()
         }
     }
