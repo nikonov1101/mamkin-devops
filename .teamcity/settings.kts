@@ -35,14 +35,7 @@ object FrontendUnitTests : BuildType({
     }
 
     features {
-        commitStatusPublisher {
-            publisher = github {
-                githubUrl = "https://api.github.com"
-                authType = personalToken {
-                    token = "credentialsJSON:558f0acb-146d-4541-93e4-1c2833d8ef80"
-                }
-            }
-        }
+        PublishCommitStatusFeature
     }
 
     steps {
